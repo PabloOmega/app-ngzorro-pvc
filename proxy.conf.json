@@ -1,0 +1,11 @@
+{
+    "/firebase": {
+      "target": "https://firestore.googleapis.com",
+      "secure": true,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/firebase": ""
+      }
+    }
+  }
+  

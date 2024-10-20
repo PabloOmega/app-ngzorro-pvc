@@ -1,0 +1,31 @@
+<div nz-flex nzVertical nzAlign="center" nzJustify="center" style="height: 100%;">
+    <form nz-form [formGroup]="form" class="login-form" (ngSubmit)="onClickRegister()">
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Por favor ingrese su correo">
+                <nz-input-group nzPrefixIcon="mail">
+                    <input type="email" nz-input formControlName="email" placeholder="user@dominio.com" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Por favor ingrese su contraseña">
+                <nz-input-group nzPrefixIcon="lock">
+                    <input type="password" nz-input formControlName="password" placeholder="Ingrese su contrasena" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Registrarme</button>
+        <button 
+            nz-button 
+            class="login-form-button login-form-margin" 
+            [nzType]="'default'"
+            type="button"
+            (click)="onClickRegisterWithGoogle()"
+            >
+            <span nz-icon nzType="google" nzTheme="outline"></span>
+            Registrarme con Google
+        </button>
+        ¿Ya tienes una cuenta?
+        <a routerLink="/login">Iniciar sesión</a>
+    </form>
+</div>

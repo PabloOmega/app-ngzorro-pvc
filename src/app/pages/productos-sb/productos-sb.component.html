@@ -1,0 +1,63 @@
+<button style="margin-bottom: 10px;" nz-button (click)="addProduct()" nzType="primary">Agregar Producto</button>
+<nz-table #editRowTable nzBordered [nzData]="products" nzTableLayout="fixed" [nzPageSize]="5">
+    <thead>
+        @for (column of listOfColumns; track column) {
+            <th
+              [nzSortOrder]="column.sortOrder"
+              [nzSortFn]="column.sortFn"
+              [nzSortDirections]="column.sortDirections"
+              [nzFilterMultiple]="column.filterMultiple"
+              [nzFilters]="column.listOfFilter"
+              [nzFilterFn]="column.filterFn"
+            >
+              {{ column.name }}
+            </th>   
+        }     
+        <!-- <tr>
+            <th nzWidth="20%">Nombre</th>
+            <th nzWidth="40%">Descripción</th>
+            <th nzWidth="15%">Precio</th>
+            <th>Acción</th>
+        </tr> -->
+    </thead>
+    <tbody>
+        @for (data of editRowTable.data; track data) {
+        <tr>
+            @if (!editCache[data.id!].edit) {
+            <td>{{ data.nombre }}</td>
+            <td>{{ data.descripcion }}</td>
+            <td>{{ data.precio }}</td>
+            <td>
+                <p style="text-align: center;">
+                    <a (click)="startEdit(data.id!)">Editar</a>
+                    <br />
+                    <a
+                        nz-popconfirm
+                        nzPopconfirmTitle="Seguro?"
+                        (nzOnConfirm)="deleteProduct(data.id!)"
+                    >
+                        Eliminar
+                    </a>
+                </p>
+            </td>
+            } @else {
+            <td><input type="text" nz-input [(ngModel)]="editCache[data.id!].data.nombre" /></td>
+            <td><textarea type="text" nz-input [(ngModel)]="editCache[data.id!].data.descripcion"></textarea></td>
+            <td><input type="number" nz-input [(ngModel)]="editCache[data.id!].data.precio"/></td>
+            <td>
+                <p style="text-align: center;">
+                    <a (click)="saveEdit(data.id!)">Guardar</a>
+                    <br />
+                    <a
+                        nz-popconfirm 
+                        nzPopconfirmTitle="Seguro?" 
+                        (nzOnConfirm)="cancelEdit(data.id!)">
+                        Cancelar
+                    </a>
+                </p>
+            </td>
+            }
+        </tr>
+        }
+    </tbody>
+</nz-table>
